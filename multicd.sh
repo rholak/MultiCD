@@ -6,6 +6,7 @@ export MCDDIR="."
 . $MCDDIR/functions.sh
 
 MCDVERSION="6.8"
+SYSLINUX_URL="http://chinesepuppylinux.googlecode.com/files/syslinux-4.04.tar.gz"
 #multicd.sh 6.8
 #Copyright (c) 2011 Isaac Schemm
 #
@@ -378,8 +379,8 @@ if [ -f grub.exe ];then
  cp grub.exe $WORK/boot/grub.exe
 fi
 
-if [ -f syslinux-4.03.tar.gz ] && [ ! -f syslinux.tar.gz ];then
-	ln -s syslinux-4.03.tar.gz syslinux.tar.gz #Link newest version
+if [ -f syslinux-4.04.tar.gz ] && [ ! -f syslinux.tar.gz ];then
+	ln -s syslinux-4.04.tar.gz syslinux.tar.gz #Link newest version
 fi
 
 if [ -f syslinux.tar.gz ];then
@@ -410,13 +411,13 @@ if [ ! -f $WORK/boot/isolinux/isolinux.bin ];then
 	echo "Downloading SYSLINUX..."
 	if $VERBOSE ;then #These will only be run if there is no syslinux.tar.gz
 		#Both of these need to be changed when a new version of syslinux comes out.
-		if ! wget -t 1 -O syslinux.tar.gz http://ftp.ntu.edu.tw/linux/boot/syslinux/4.xx/syslinux-4.04.tar.gz;then
+		if ! wget -t 1 -O syslinux.tar.gz $SYSLINUX_URL ; then
 			echo "Error: could not download SYSLINUX. Please update the URL in $0."
 			rm syslinux.tar.gz
 			false #quits script
 		fi
 	else
-		if ! wget -t 1 -qO syslinux.tar.gz http://ftp.ntu.edu.tw/linux/boot/syslinux/4.xx/syslinux-4.04.tar.gz;then
+		if ! wget -t 1 -qO $SYSLINUX_URL; then
 			echo "Error: could not download SYSLINUX. Please update the URL in $0."
 			rm syslinux.tar.gz
 			false #quits script

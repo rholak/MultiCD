@@ -24,7 +24,7 @@ set -e
 #THE SOFTWARE.
 if [ $1 = links ];then
 	echo "CentOS-*-netinstall.iso centos-boot.iso none"
-if [ $1 = scan ];then
+elif [ $1 = scan ];then
 	if [ -f centos-boot.iso ];then
 		echo "CentOS netboot installer"
 	fi
